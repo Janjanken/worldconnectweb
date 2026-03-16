@@ -1,0 +1,1839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorldConnect - Bridging the World Together</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        /*
+        ========================================
+        Final Modern Stylesheet for WorldConnect
+        ========================================
+        */
+        
+        /* ====== Design System: Variables ====== */
+        :root {
+            /* Color Palette */
+            --primary: #4f46e5;
+            --primary-light: #818cf8;
+            --primary-dark: #3730a3;
+            --dark: #000000;
+            --dark-800: #1e293b;
+            --dark-700: #000000;
+            --light: #f8fafc;
+            --light-200: #e2e8f0;
+            --light-300: #cbd5e1;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            
+            /* Spacing */
+            --space-unit: 1rem;
+            
+            /* Typography */
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            --font-heading: 'Poppins', var(--font-sans);
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            
+            /* Border Radius */
+            --radius: 0.5rem;
+            --radius-lg: 1rem;
+            --radius-full: 9999px;
+            
+            /* Transitions */
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ====== Base Styles ====== */
+        body {
+            font-family: var(--font-sans);
+            color: var(--dark-700);
+            background-color: #F5F5F5; /* Smoke white background only */
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-top: 72px;
+        }
+
+        html {
+            background-color: #F5F5F5; /* Smoke white */
+            min-height: 100%;
+            height: 100%;
+        }
+
+        /* Ensure all sections allow background to show */
+        section {
+            background-color: transparent;
+            position: relative;
+        }
+
+        /* Mobile background attachment fix */
+        @media (max-width: 991.98px) {
+            .modal-content {
+                width: 92%;
+                max-width: 90%;
+                margin: 1rem auto;
+                border-radius: 12px;
+            }
+            
+            .modal-header {
+                padding: 1.5rem 1.75rem 1.25rem;
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .modal-header h3 {
+                padding-left: 0;
+                margin-top: 40px;
+                text-align: center;
+                justify-content: center;
+                min-height: auto;
+                margin-bottom: 0.5rem;
+            }
+            
+            .modal-body {
+                padding: 2rem 1.75rem 1.5rem;
+            }
+            
+            .modal-body img {
+                left: 50%;
+                transform: translateX(-50%) rotate(-5deg);
+                top: -45px;
+                width: 80px;
+                height: 80px;
+            }
+            
+            .modal-body img:hover {
+                transform: translateX(-50%) rotate(0) scale(1.05);
+            }
+            
+            .modal-footer {
+                padding: 1.25rem 1.75rem;
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            
+            .modal-footer .btn {
+                width: 100%;
+                margin: 0;
+            }
+        }
+        
+        @media (max-width: 767.98px) {
+            body {
+                background-attachment: scroll;
+            }
+            
+            .hero-section,
+            .features-section {
+                background-attachment: scroll;
+            }
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--dark);
+            margin-bottom: 1.25rem;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--primary-dark);
+        }
+
+        /* Responsive images */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* ====== Navigation ====== */
+        .navbar {
+            background-color: var(--dark) !important;
+            backdrop-filter: blur(8px);
+            box-shadow: var(--shadow-sm);
+            padding: 0.75rem 0;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            box-shadow: var(--shadow); /* Keep shadow for depth, but remove other changes */
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--light) !important;
+        }
+
+        .navbar-brand .logo-img {
+            height: 60px; /* Further increased logo size */
+        }
+
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8) !important;
+            padding: 0.5rem 1rem;
+            margin: 0 0.25rem;
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: white !important;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* ====== Hero Section ====== */
+        .hero-section {
+            padding: 5rem 0;
+            background-image: linear-gradient(rgba(248, 250, 252, 0.3), rgba(226, 232, 240, 0.3)), url('globe.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--dark-700);
+            max-width: 600px;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: auto;
+            max-height: 600px;
+            object-fit: contain;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ====== About Section ====== */
+        #about {
+            background-image: linear-gradient(rgba(248, 250, 252, 0.4), rgba(226, 232, 240, 0.4)), url('globe.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .about-content {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .about-content h3 {
+            color: var(--primary);
+            font-size: 1.75rem;
+        }
+
+        .about-content p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--dark-700);
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+        }
+
+        .mission-vision-cards .card {
+            transition: var(--transition);
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .mission-vision-cards .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .mission-vision-cards .feature-icon {
+            width: 56px;
+            height: 56px;
+            font-size: 1.5rem;
+        }
+
+        .mission-vision-cards h4 {
+            color: var(--primary);
+            font-size: 1.25rem;
+        }
+
+        .mission-vision-cards p {
+            line-height: 1.8;
+            color: var(--dark-700);
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+        }
+
+        /* ====== Features Section ====== */
+        .features-section {
+            padding: 5rem 0;
+            background-image: linear-gradient(rgba(248, 250, 252, 0.3), rgba(226, 232, 240, 0.3)), url('bg3.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            backdrop-filter: blur(10px);
+        }
+
+        .features-section .row {
+            margin-top: 2rem;
+        }
+
+        /* ====== Section Titles ====== */
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--dark-700);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ====== Feature Cards ====== */
+        .feature-card {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(15px);
+            border-radius: var(--radius-lg);
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Transparent blurred border */
+            box-shadow: var(--shadow-md); /* Softer shadow */
+            overflow: hidden; /* Ensure images respect border radius */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg); /* More pronounced shadow on hover */
+            border-color: var(--primary-light);
+        }
+
+        .feature-card .card-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .feature-card h3 {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+            color: var(--dark);
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: var(--radius-full);
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            font-size: 1.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-icon i {
+            display: flex; /* Fix for icon alignment */
+        }
+
+        .feature-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: var(--radius-full);
+        }
+
+        .feature-img {
+            width: 100%;
+            height: 200px; /* Increased height for better visibility */
+            object-fit: cover; /* Fill the container while maintaining aspect ratio */
+            box-shadow: var(--shadow-md);
+            margin: 0;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0; /* Rounded top corners only */
+            display: block;
+        }
+
+        /* ====== Contact Section ====== */
+        .contact-section {
+            padding: 5rem 0;
+            background-image: linear-gradient(rgba(248, 250, 252, 0.3), rgba(226, 232, 240, 0.3)), url('bg3.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+        
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.05), rgba(129, 140, 248, 0.05));
+            z-index: 1;
+        }
+        
+        .contact-section > .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 2.5rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light), var(--primary));
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            border-radius: var(--radius-full);
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+        
+        .contact-details h4 {
+            margin-bottom: 0.25rem;
+            font-size: 1.125rem;
+        }
+        
+        .contact-details p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            border: 1px solid var(--light-300);
+            border-radius: var(--radius);
+            padding: 0.75rem 1rem;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            min-width: 44px; /* Touch-friendly */
+            min-height: 44px; /* Touch-friendly */
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        /* Social Contact Cards */
+        .social-contact-card {
+            display: block;
+            padding: 2rem 1.5rem;
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--light-200);
+            text-decoration: none;
+            color: var(--dark);
+            transition: var(--transition);
+            height: 100%;
+        }
+
+        .social-contact-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .social-icon-large {
+            width: 64px;
+            height: 64px;
+            border-radius: var(--radius-full);
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            font-size: 1.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            transition: var(--transition);
+        }
+
+        .social-contact-card:hover .social-icon-large {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        }
+
+        .contact-method-simple {
+            padding: 1rem;
+            background: rgba(79, 70, 229, 0.05);
+            border-radius: var(--radius);
+            border: 1px solid rgba(79, 70, 229, 0.1);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+        }
+
+        /* ====== Footer ====== */
+        .footer {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+            color: white;
+            padding: 2.5rem 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            animation: footerGlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes footerGlow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .footer h5 {
+            color: white;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.85rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer h5::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .footer:hover h5::after {
+            width: 60px;
+        }
+
+        .footer p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer .logo-img {
+            height: 32px; /* Style for footer logo */
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: var(--transition);
+            display: inline-block;
+            padding: 0.25rem 0;
+            position: relative;
+        }
+
+        .footer-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .footer-links a:hover::before {
+            width: 100%;
+        }
+        
+        .footer .social-link {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            margin-top: 2rem;
+            padding: 1rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .footer-bottom p {
+            margin-bottom: 0;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ====== Buttons ====== */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: var(--transition);
+            border-radius: var(--radius);
+            min-height: 44px; /* Touch-friendly minimum size */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;         
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border: none;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .btn-outline-primary {
+            color: var(--primary);
+            border-color: var(--primary);
+            background-color: transparent;
+        }
+        /* Adjusted feature card button styling - transparent and small */
+        .feature-card .btn-outline-primary {
+            border: 1px solid var(--primary) !important; 
+            color: var(--primary);
+            background-color: transparent !important;
+            padding: 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            margin-top: auto; /* Push button to bottom of card */
+            cursor: pointer;
+        }
+        .feature-card .btn-outline-primary:hover {
+             color: white;
+             background-color: var(--primary) !important;
+             opacity: 0.9;
+        }
+
+        /* ====== Country Modal ====== */
+        .country-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .country-modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            backdrop-filter: blur(15px);
+            margin: auto;
+            padding: 0;
+            border-radius: calc(var(--radius-lg) + 4px);
+            width: 90%;
+            max-width: 700px;
+            box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.2);
+            animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-top: 4px solid var(--primary);
+            transform: translateZ(0);
+            will-change: transform;
+        }
+
+        .modal-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border-radius: calc(var(--radius-lg) - 2px) calc(var(--radius-lg) - 2px) 0 0;
+            position: relative;
+            z-index: 5;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.15);
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            color: white;
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            padding-left: 100px;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+        }
+
+        .modal-close {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 0;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-close:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+            transform: rotate(90deg) scale(1.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .modal-body {
+            padding: 2.5rem 2.5rem 2rem;
+            background: transparent;
+            position: relative;
+            line-height: 1.7;
+            color: var(--dark-700);
+        }
+
+        .modal-body img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+            position: absolute;
+            top: -40px;
+            left: 30px;
+            border: 4px solid white;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .modal-body li {
+            margin-bottom: 0.75rem;
+            line-height: 1.8;
+            color: var(--dark-700);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .modal-body li:before {
+            content: '•';
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+            line-height: 1;
+        }
+
+        .modal-footer {
+            padding: 1.5rem 2.5rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            background: rgba(249, 250, 251, 0.8);
+            border-radius: 0 0 calc(var(--radius-lg) - 2px) calc(var(--radius-lg) - 2px);
+        }
+
+        /* ====== Back to Top Button ====== */
+        .back-to-top {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            display: none;
+            z-index: 999;
+            width: 48px;
+            height: 48px;
+            padding: 0;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ====== Responsive Adjustments ====== */
+        
+        /* Tablet and smaller desktop */
+        @media (max-width: 1199.98px) {
+            .hero-title { font-size: 3rem; }
+            .section-title h2 { font-size: 2.25rem; }
+        }
+
+        @media (max-width: 991.98px) {
+            .hero-title { font-size: 2.75rem; }
+            .section-title h2 { font-size: 2rem; }
+            body { padding-top: 66px; }
+            .navbar-brand .logo-img { height: 48px; }
+            
+            /* About section adjustments */
+            .about-content {
+                padding: 2rem;
+            }
+            
+            .mission-vision-cards .card {
+                margin-bottom: 1.5rem;
+            }
+            
+            /* Feature cards */
+            .feature-card {
+                margin-bottom: 1.5rem;
+            }
+            
+            /* Modal adjustments */
+            .modal-content {
+                width: 95%;
+                max-width: 600px;
+                margin: 1rem auto;
+            }
+            
+            .modal-header {
+                padding: 1.25rem 1.5rem;
+            }
+            
+            .modal-body {
+                padding: 2rem 1.5rem 1.5rem;
+            }
+            
+            .modal-footer {
+                padding: 1.25rem 1.5rem;
+            }
+            
+            .modal-body img {
+                width: 70px;
+                height: 70px;
+                left: 20px;
+                top: -35px;
+            }
+        }
+
+        /* Mobile devices */
+        @media (max-width: 767.98) {
+            .modal-content {
+                width: 97%;
+                max-width: 100%;
+                margin: 0.5rem;
+                max-height: 95vh;
+            }
+            
+            .modal-header {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem 1rem;
+            }
+            
+            .modal-header h3 {
+                padding-left: 0;
+                margin-top: 30px;
+                text-align: center;
+                justify-content: center;
+            }
+            
+            .modal-body {
+                padding: 1.5rem 1.25rem;
+            }
+            
+            .modal-body img {
+                left: 50%;
+                transform: translateX(-50%);
+                top: -40px;
+            }
+            
+            .modal-footer {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            
+            .modal-footer .btn {
+                width: 100%;
+                margin: 0;
+            }
+            
+            .hero-section { 
+                text-align: center; 
+                padding: 3rem 0;
+            }
+            
+            .hero-title { 
+                font-size: 2.25rem; 
+                margin-bottom: 1.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .hero-img {
+                max-height: 400px;
+                margin-top: 2rem;
+            }
+            
+            /* Section titles */
+            .section-title h2 {
+                font-size: 1.75rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1rem;
+            }
+            
+            /* Features section */
+            .features-section {
+                padding: 3rem 0;
+            }
+            
+            .feature-card h3 {
+                font-size: 1.1rem;
+            }
+            
+            /* About section */
+            .about-content {
+                padding: 1.5rem;
+            }
+            
+            .about-content h3 {
+                font-size: 1.5rem;
+            }
+            
+            .about-content p {
+                font-size: 0.95rem;
+            }
+            
+            .mission-vision-cards .card-body {
+                padding: 1.5rem;
+            }
+            
+            .mission-vision-cards .feature-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 1.25rem;
+            }
+            
+            .mission-vision-cards h4 {
+                font-size: 1.1rem;
+            }
+            
+            /* Buttons */
+            .btn-lg {
+                padding: 0.625rem 1.25rem;
+                font-size: 1rem;
+            }
+            
+            .d-flex.gap-3 {
+                flex-direction: column;
+                gap: 0.75rem !important;
+            }
+            
+            .d-flex.gap-3 .btn {
+                width: 100%;
+            }
+            
+            /* Modal mobile */
+            .modal-body ul {
+                padding-left: 1.75rem;
+                margin: 1.5rem 0 2rem;
+            .modal-body img {
+                max-height: 150px;
+            }
+            
+            .modal-footer {
+                padding: 1rem;
+                flex-direction: column;
+            }
+            
+            .modal-footer .btn {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+            
+            /* Footer */
+            .footer {
+                padding-top: 2rem;
+            }
+            
+            .footer .row {
+                text-align: center;
+                gap: 1.5rem;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .footer h5 {
+                font-size: 0.8rem;
+                margin-bottom: 0.75rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 0.5rem !important;
+            }
+            
+            .footer-links a {
+                font-size: 0.85rem;
+            }
+            
+            /* Contact section mobile */
+            .contact-section {
+                background-attachment: scroll;
+            }
+            
+            .contact-card {
+                padding: 1.5rem;
+            }
+            
+            .social-contact-card {
+                padding: 1.5rem 1rem;
+            }
+            
+            .social-icon-large {
+                width: 56px;
+                height: 56px;
+                font-size: 1.5rem;
+            }
+            
+            /* Navbar */
+            .navbar-nav {
+                text-align: center;
+                padding: 1rem 0;
+            }
+            
+            .navbar-nav .nav-link {
+                padding: 0.75rem 1rem;
+            }
+        }
+
+        /* Small mobile devices */
+        @media (max-width: 575.98px) {
+            .hero-title {
+                font-size: 1.75rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+            
+            .about-content {
+                padding: 1.25rem;
+            }
+            
+            .feature-card .card-body {
+                padding: 1.25rem;
+            }
+            
+            .modal-content {
+                width: 98%;
+            }
+            
+            .modal-header,
+            .modal-body,
+            .modal-footer {
+                padding: 1.25rem 0.75rem;
+            }
+            
+            body {
+                padding-top: 60px;
+            }
+            
+            .navbar-brand .logo-img {
+                height: 40px;
+            }
+        }
+
+        /* Large desktop */
+        @media (min-width: 1400px) {
+            .container {
+                max-width: 1320px;
+            }
+            
+            .hero-title {
+                font-size: 4rem;
+            }
+            
+            .section-title h2 {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="logo.jpg" alt="WorldConnect Logo" class="logo-img me-2">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
+                    <h1 class="hero-title mb-4">Start your journey with us!
+                    </h1>
+                    <p class="hero-subtitle mb-5">WorldConnect Consultancy Services, Inc. is a duly licensed immigration and international education consultancy firm operating mainly in the Philippines.
+
+                        With 13 branches nationwide, our company’s goal is to provide new graduates and unemployed Filipinos with an alternative route or pathway in their pursuit to success, by assisting them in securing a student visa, ultimately leading to residency in countries such as Canada, Finland, Germany, Malta, New Zealand, Spain, United Kingdom, or USA!
+                        
+                        WORLDCONNECT,
+                        Your Visa To A Better Future!</p>
+                    <div class="d-flex gap-3 justify-content-center justify-content-lg-start">
+                        <a href="#contact" class="btn btn-primary btn-lg">Inquire Now</a>
+                        <a href="#features" class="btn btn-outline-primary btn-lg text-white">View Services</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-5 mt-lg-0" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    <img src="home.jpg" alt="WorldConnect" class="hero-img img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Our Services</h2>
+                <p class="section-subtitle">Connect with people from every corner of the world through our reliable and secure platform.</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card h-100">
+                        <img src="australia.jpg" alt="Australia Flag" class="feature-img">
+                        <div class="card-body text-center">
+                            <h3>Australia</h3>
+                            <button type="button" class="btn btn-sm btn-outline-primary explore-btn" data-country="Australia" data-img="australia.jpg">Explore More</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card h-100">
+                        <img src="canada.jpg" alt="Canada Flag" class="feature-img">
+                        <div class="card-body text-center">
+                            <h3>Canada</h3>
+                            <button type="button" class="btn btn-sm btn-outline-primary explore-btn" data-country="Canada" data-img="canada.jpg">Explore More</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card h-100">
+                        <img src="nz.jpg" alt="NZ Flag" class="feature-img">
+                        <div class="card-body text-center">
+                            <h3>New Zealand</h3>
+                            <button type="button" class="btn btn-sm btn-outline-primary explore-btn" data-country="New Zealand" data-img="nz.jpg">Explore More</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-card h-100">
+                        <img src="uk.jpg" alt="Uk Flag" class="feature-img">
+                        <div class="card-body text-center">
+                            <h3>United Kingdom</h3>
+                            <button type="button" class="btn btn-sm btn-outline-primary explore-btn" data-country="United Kingdom" data-img="uk.jpg">Explore More</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-card h-100">
+                        <img src="germany.jpg" alt="Germany Flag" class="feature-img">
+                        <div class="card-body text-center">
+                            <h3>Germany</h3>
+                            <button type="button" class="btn btn-sm btn-outline-primary explore-btn" data-country="Germany" data-img="germany.jpg">Explore More</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="600">
+                    <div class="feature-card h-100">
+                        <img src="spain.jpg" alt="Spain Flag" class="feature-img">
+                        <div class="card-body text-center">
+                            <h3>Spain</h3>
+                            <button type="button" class="btn btn-sm btn-outline-primary explore-btn" data-country="Spain" data-img="spain.jpg">Explore More</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="700">
+                    <div class="feature-card h-100">
+                        <img src="malta.jpg" alt="Malta Flag" class="feature-img">    
+                        <div class="card-body text-center">
+                            <h3>Malta</h3>
+                            <button type="button" class="btn btn-sm btn-outline-primary explore-btn" data-country="Malta" data-img="malta.jpg">Explore More</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="800">
+                    <div class="feature-card h-100">
+                        <img src="finland.jpg" alt="Finland Flag" class="feature-img">
+                        <div class="card-body text-center">
+                            <h3>Finland</h3>
+                            <button type="button" class="btn btn-sm btn-outline-primary explore-btn" data-country="Finland" data-img="finland.jpg">Explore More</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="900">
+                    <div class="feature-card h-100">
+                        <img src="us.jpg" alt="US Flag" class="feature-img">
+                        <div class="card-body text-center">
+                            <h3>United States</h3>
+                            <button type="button" class="btn btn-sm btn-outline-primary explore-btn" data-country="United States" data-img="us.jpg">Explore More</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-5">
+        <div class="container py-5">
+            <div class="section-title mb-5" data-aos="fade-up">
+                <h2>About WorldConnect</h2>
+                <p class="section-subtitle">Your Visa to a Better Future!</p>
+            </div>
+            
+            <div class="row g-5 align-items-start">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="about-content">
+                        <h3 class="mb-4 fw-bold">Our Story</h3>
+                        <p class="mb-4">WORLDCONNECT is a leader in the Philippines in connecting Filipinos to a better future through international education.</p>
+                        
+                        <p class="mb-4">Our story started in 2007 with a dream of a young professional who, along with millions of others became part of what is now the Filipino diaspora, braved life abroad in search of a better future. <strong>Catherine Altarejos</strong>, the company's Founder, President, & CEO, recognized the value and payoff of a good education coupled with the fact that Filipinos are arguably among the hardest working people in the world.</p>
+                        
+                        <p class="mb-4">WORLDCONNECT was born out of the dream to make international education accessible to Filipinos during a time when the idea sounded lavish and only for the fortunate few.</p>
+                        
+                        <p class="mb-4">With now more than a decade of experience and expertise under its belt, we have helped around <strong>6,000 Filipinos</strong> pursue studies and world-class training in major countries – Australia, Canada, Finland, Germany, Malta, New Zealand, Spain, The United Kingdom, and USA. We are the largest international education and visa consultancy firm in the Philippines with <strong>Thirteen (13) locations</strong> across major cities in the Philippines.</p>
+                        
+                        <p class="mb-4">We also pride ourselves on being one of the very few <strong>100% Filipino-owned corporations</strong> in this industry.</p>
+                        
+                        <div class="d-flex gap-3 mt-5">
+                            <a href="#contact" class="btn btn-primary">Contact Us</a>
+                            <a href="#features" class="btn btn-outline-primary">Our Services</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="mission-vision-cards">
+                        <div class="card border-0 shadow-lg mb-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="card-body p-4 p-md-5">
+                                <h4 class="mb-3 fw-bold">Our Mission</h4>
+                                <p class="mb-0">Through excellent education and immigration advice, it is our mission to make our clients' dreams of studying and living in Australia, Canada, Finland, Germany, Malta, New Zealand, Spain, The United Kingdom, and USA come true.</p>
+                                <p class="mb-0 mt-3">Although our efforts are client-centric, we also endeavor to give our own staff members a sense of fulfillment and entitlement in the work that they do, making them realize that they have a major role and responsibility in changing someone's future.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="card border-0 shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                            <div class="card-body p-4 p-md-5">
+                                <h4 class="mb-3 fw-bold">Our Vision</h4>
+                                <p class="mb-0">We envision to be the leading student visa assistance and immigration consultancy firm in the Philippines, aimed at changing for the better the lives of those who want to study in Australia, Canada, Finland, Germany, Malta, New Zealand, Spain, The United Kingdom, and USA.</p>
+                                <p class="mb-0 mt-3">We look toward a future where Filipinos will not be left behind in this rapidly advancing and more connected and globalized world; that international education is something that is neither impossible or out of reach to ordinary, working-class Filipinos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-title mb-5" data-aos="fade-up">
+                <h2>Contact Us</h2>
+                <p class="section-subtitle">Get in touch with us to start your journey to a better future</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4" data-aos="fade-right" data-aos-delay="100">
+                    <div class="contact-card h-100">
+                        <h3 class="mb-4">Inquire Now!</h3>
+                        <p class="mb-4">Ready to start your international education journey? Our team is here to help you every step of the way.</p>
+                        
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <i class="bi-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Email Us</h4>
+                                <p>cabanatuan@worldconnectph.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <i class="bi-telephone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Call Us</h4>
+                                <p>+63 908-874-6212</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <i class="bi-geo-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Visit Us</h4>
+                                <p>Stall 3 Queen Elizabeth Building, M. De Leon Ave. Kapitan Pepe Subd. Cabanatuan City, Philippines</p>
+                            </div>
+                        </div>
+                        
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/share/1HtaFerTTP/" class="social-link" title="Facebook"><i class="bi-facebook"></i></a>
+                            <a href="mailto:cabanatuan@worldconnectph.com" class="social-link" title="Email"><i class="bi-envelope"></i></a>
+                            <a href="#" class="social-link" title="TikTok"><i class="bi-tiktok"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-8" data-aos="fade-left" data-aos-delay="200">
+                    <div class="contact-card h-100">
+                        <h3 class="mb-4">Connect With Us</h3>
+                        <p class="mb-4">Reach out to us through our social media platforms for the fastest response. We're here to help you start your international education journey!</p>
+                        
+                        <a href="https://www.facebook.com/share/1HtaFerTTP/" target="_blank" class="contact-method text-decoration-none">
+                            <div class="contact-icon">
+                                <i class="bi-facebook"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Facebook</h4>
+                                <p>Message us on Facebook for quick responses</p>
+                            </div>
+                        </a>
+    
+                        
+                        <a href="https://www.tiktok.com/@worldconnect_cabanatuan?_r=1&_t=ZS-92LHB0AMkoD" target="_blank" class="contact-method text-decoration-none">
+                            <div class="contact-icon">
+                                <i class="bi-tiktok"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>TikTok</h4>
+                                <p>Follow us for updates and tips</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <div class="row">
+                    <div class="col-12">
+                        <p class="mb-0">&copy; 2026 WorldConnect Consultancy Services Inc. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="btn btn-primary btn-lg rounded-circle back-to-top" id="back-to-top">
+        <i class="bi-arrow-up"></i>
+    </a>
+
+    <!-- Country Modal -->
+    <div id="countryModal" class="country-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalCountryName">Country Name</h3>
+                <button type="button" class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img id="modalCountryImg" src="" alt="Country Flag" class="img-fluid">
+                <div id="modalCountryContent">
+                    <p>Loading information...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS animation
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true,
+                offset: 100
+            });
+            
+            // Navbar scroll effect
+            const navbar = document.querySelector('.navbar');
+            const handleNavbarScroll = () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            };
+            window.addEventListener('scroll', handleNavbarScroll);
+            handleNavbarScroll(); // Run once on load for correct initial state
+            
+            // Back to top button visibility
+            const backToTopButton = document.getElementById('back-to-top');
+            const toggleBackToTop = () => {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.style.display = 'flex';
+                } else {
+                    backToTopButton.style.display = 'none';
+                }
+            };
+            window.addEventListener('scroll', toggleBackToTop);
+            toggleBackToTop(); // Run once on load
+            
+            // Back to top click handler
+            backToTopButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Smooth scrolling for anchor links and active link tracking
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+            const sections = document.querySelectorAll('section');
+            const headerOffset = 72; // Adjusted offset for fixed header
+
+            // Function to handle smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - headerOffset,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Collapse navbar on mobile after clicking a link
+                        const navbarCollapse = document.getElementById('navbarNav');
+                        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+                        if (bsCollapse) {
+                            bsCollapse.hide();
+                        }
+                    }
+                });
+            });
+
+            // Function to set active nav link on scroll
+            const setActiveLink = () => {
+                let current = '';
+                
+                sections.forEach(section => {
+                    // Offset sectionTop slightly to trigger the active state sooner
+                    const sectionTop = section.offsetTop - headerOffset - 50; 
+                    const sectionHeight = section.offsetHeight;
+                    
+                    if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href') === `#${current}`) {
+                        item.classList.add('active');
+                    }
+                });
+            };
+            
+            window.addEventListener('scroll', setActiveLink);
+            setActiveLink(); // Run once on load
+
+            // Country Modal Functionality
+            const countryModal = document.getElementById('countryModal');
+            const modalCountryName = document.getElementById('modalCountryName');
+            const modalCountryImg = document.getElementById('modalCountryImg');
+            const modalCountryContent = document.getElementById('modalCountryContent');
+            const modalClose = document.getElementById('modalClose');
+            const modalCloseBtn = document.getElementById('modalCloseBtn');
+            const exploreButtons = document.querySelectorAll('.explore-btn');
+
+            // Country information data
+            const countryInfo = {
+                'Australia': {
+                    description: 'Australia offers world-class education. For a country with a relatively small number of universities, Australia offers a truly world-class education and regularly features in global rankings. They offer great work opportunities. International students can work in Australia. Students also have the opportunity to stay in Australia to work once they have graduated, taking advantage of the post-study work visa. There are also opportunities such as the Professional Year Program (PYP), which allows graduates of accounting, information technology and engineering degrees to gain experience and mentoring in an Australian workplace. Completing a PYP can assist you to gain permanent residency.'
+                },
+                'Canada': {
+                    description: 'Canada\'s education qualifications are valued around the world. They offer affordable education, exciting campus lifestyle, innovative and abundant research opportunities, and world-class language education. Canada, the so called "Land of Possibilities" have multicultural society, healthy and safe communities. There is also a possibility of immigration.'
+                },
+                'New Zealand': {
+                    description: 'New Zealand\'s economy is actually incredibly stable, the cost of living is low, and the government is more stable (and less argumentative) than the governments that you will see in other countries. They offer some of the lowest tuition in the world, you get a British-based education (due to their British influences) for a percentage of the cost. The degrees are recognized around the world as being up-to-date and practical. They also offer work opportunities; on a student visa, you are allowed to work. Another great thing is that you can get a permit at the end of your degree program and work for 12 months in the country under a special "work permit" that is alongside your student visa, which is what we\'ll look at closer in the last point.'
+                },
+                'United Kingdom': {
+                    description: 'With an excellent higher-education system and hundreds of world-class universities, the UK promises a rich experience for international students. Degrees and qualifications from UK higher education institutions are known around the world as high quality and world class. Because your degree will generally take less time to complete in the UK than in other countries, you could save money compared to a US school. International students in UK are allowed to work 20 hours a week during school term, and up to full-time when school is out of term.'
+                },
+                'Germany': {
+                    description: 'Germany is a prime destination for higher education due to its world-class universities, a wide range of English-taught programs, tuition-free education at public institutions, and excellent job opportunities post-graduation. The country\'s strong economy, vibrant multicultural community, affordable living costs, and leading position in the tech industry make it an attractive option for students from around the globe.'
+                },
+                'Spain': {
+                    description: 'Spain is an excellent study-abroad destination, offering top-tier universities, affordable tuition, and a rich cultural experience. International students can access globally recognized programs, enjoy a Mediterranean climate, and immerse themselves in Spain\'s vibrant traditions. With many English-taught courses, it remains accessible for non-Spanish speakers while still providing opportunities to learn the language. The country\'s strong economy and international business presence create valuable networking and career prospects, making it a well-rounded choice for education and professional growth.'
+                },
+                'Malta': {
+                    description: 'Studying in Malta as an international student offers a blend of high-quality education, an affordable cost of living, and the advantage of English as an official language. With its rich history, culture, and safe environment, Malta provides a vibrant and welcoming atmosphere. The beautiful Mediterranean climate, along with job opportunities and easy access to other European destinations, makes Malta an appealing choice for students seeking both academic and personal growth.'
+                },
+                'Finland': {
+                    description: 'Finland is an excellent choice for international students, offering world-class education, affordability, and a unique learning experience. The country consistently ranks among the best in global education, with universities emphasizing academic freedom, equality, and practical learning. Finland\'s flat hierarchy in universities fosters close student-professor relationships, and students have the flexibility to tailor their studies to their interests. Beyond academics, Finland provides a high quality of life, stunning natural landscapes, and a strong focus on work-life balance.'
+                },
+                'United States': {
+                    description: 'The USA is a top destination for international students, offering world-class universities, diverse academic programs, and strong career opportunities. With over 5,000 higher education institutions, students can choose from a wide range of disciplines and benefit from cutting-edge research facilities. The flexible education system allows students to explore different subjects before committing to a major. Additionally, the USA provides internship and work opportunities, helping students gain real-world experience and build professional networks. The country\'s cultural diversity ensures a dynamic and enriching student life, making it an excellent choice for global education.'
+                }
+            };
+
+            // Function to open modal
+            function openModal(country, imgSrc) {
+                const info = countryInfo[country];
+                if (info) {
+                    modalCountryName.textContent = country;
+                    modalCountryImg.src = imgSrc;
+                    modalCountryImg.alt = `${country} Flag`;
+                    
+                    let contentHTML = `<p><strong>${info.description}</strong></p>`;
+
+                    
+                    modalCountryContent.innerHTML = contentHTML;
+                    countryModal.classList.add('show');
+                    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                }
+            }
+
+            // Function to close modal
+            function closeModal() {
+                countryModal.classList.remove('show');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+
+            // Add event listeners to explore buttons
+            exploreButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const country = this.getAttribute('data-country');
+                    const imgSrc = this.getAttribute('data-img');
+                    openModal(country, imgSrc);
+                });
+            });
+
+            // Close modal when clicking close button
+            modalClose.addEventListener('click', closeModal);
+            modalCloseBtn.addEventListener('click', closeModal);
+
+            // Close modal when clicking outside the modal content
+            countryModal.addEventListener('click', function(e) {
+                if (e.target === countryModal) {
+                    closeModal();
+                }
+            });
+
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && countryModal.classList.contains('show')) {
+                    closeModal();
+                }
+            });
+
+            // Contact Form Submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form data
+                    const formData = new FormData(this);
+                    const formObject = {};
+                    formData.forEach((value, key) => {
+                        formObject[key] = value;
+                    });
+                    
+                    // Simple validation
+                    const requiredFields = ['firstName', 'lastName', 'email', 'country', 'message'];
+                    let isValid = true;
+                    
+                    requiredFields.forEach(field => {
+                        if (!formObject[field] || formObject[field].trim() === '') {
+                            isValid = false;
+                            const input = document.getElementById(field);
+                            if (input) {
+                                input.classList.add('is-invalid');
+                            }
+                        } else {
+                            const input = document.getElementById(field);
+                            if (input) {
+                                input.classList.remove('is-invalid');
+                            }
+                        }
+                    });
+                    
+                    // Email validation
+                    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailPattern.test(formObject.email)) {
+                        isValid = false;
+                        document.getElementById('email').classList.add('is-invalid');
+                    }
+                    
+                    if (isValid) {
+                        // Show success message
+                        const submitButton = this.querySelector('button[type="submit"]');
+                        const originalText = submitButton.innerHTML;
+                        submitButton.innerHTML = '<i class="bi-check-circle me-2"></i>Message Sent!';
+                        submitButton.classList.add('btn-success');
+                        submitButton.disabled = true;
+                        
+                        // Here you would normally send the data to a server
+                        console.log('Form submitted:', formObject);
+                        
+                        // Reset form after delay
+                        setTimeout(() => {
+                            this.reset();
+                            submitButton.innerHTML = originalText;
+                            submitButton.classList.remove('btn-success');
+                            submitButton.disabled = false;
+                            
+                            // Show a success notification
+                            showNotification('Thank you for your message! We will get back to you soon.', 'success');
+                        }, 2000);
+                    } else {
+                        showNotification('Please fill in all required fields correctly.', 'error');
+                    }
+                });
+            }
+
+            // Notification function
+            function showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `alert alert-${type} position-fixed top-0 start-50 translate-middle-x mt-3`;
+                notification.style.zIndex = '9999';
+                notification.style.minWidth = '300px';
+                notification.innerHTML = `
+                    <div class="d-flex align-items-center">
+                        <i class="bi-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'} me-2"></i>
+                        ${message}
+                    </div>
+                `;
+                
+                document.body.appendChild(notification);
+                
+                // Animate in
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    notification.style.transform = 'translate(-50%, -20px)';
+                    notification.style.transition = 'all 0.3s ease';
+                    
+                    setTimeout(() => {
+                        notification.style.opacity = '1';
+                        notification.style.transform = 'translate(-50%, 0)';
+                    }, 50);
+                }, 100);
+                
+                // Remove after 3 seconds
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    notification.style.transform = 'translate(-50%, -20px)';
+                    
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 300);
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>

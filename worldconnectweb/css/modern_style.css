@@ -1,0 +1,324 @@
+/*
+========================================
+  Final Modern Stylesheet for WorldConnect
+========================================
+*/
+
+/* ====== Design System: Variables ====== */
+:root {
+    /* Color Palette */
+    --primary: #4f46e5;
+    --primary-light: #818cf8;
+    --primary-dark: #3730a3;
+    --dark: #000000;
+    --dark-800: #1e293b;
+    --dark-700: #334155;
+    --light: #f8fafc;
+    --light-200: #e2e8f0;
+    --light-300: #cbd5e1;
+    --success: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --info: #3b82f6;
+    
+    /* Spacing */
+    --space-unit: 1rem;
+    
+    /* Typography */
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    --font-heading: 'Poppins', var(--font-sans);
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    
+    /* Border Radius */
+    --radius: 0.5rem;
+    --radius-lg: 1rem;
+    --radius-full: 9999px;
+    
+    /* Transitions */
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ====== Base Styles ====== */
+body {
+    font-family: var(--font-sans);
+    color: var(--dark-700);
+    background-color: var(--light);
+    line-height: 1.6;
+    overflow-x: hidden;
+    padding-top: 72px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--dark);
+    margin-bottom: 1.25rem;
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--primary-dark);
+}
+
+/* ====== Navigation ====== */
+.navbar {
+    background-color: var(--dark) !important;
+    backdrop-filter: blur(8px);
+    box-shadow: var(--shadow-sm);
+    padding: 0.75rem 0;
+    transition: var(--transition);
+}
+
+.navbar.scrolled {
+    box-shadow: var(--shadow); /* Keep shadow for depth, but remove other changes */
+}
+
+.navbar-brand {
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--light) !important;
+}
+
+.navbar-brand .logo-img {
+    height: 60px; /* Further increased logo size */
+}
+
+.navbar-nav .nav-link {
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8) !important;
+    padding: 0.5rem 1rem;
+    margin: 0 0.25rem;
+    border-radius: var(--radius);
+    transition: var(--transition);
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    color: white !important;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ====== Hero Section ====== */
+.hero-section {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--dark-700);
+    max-width: 600px;
+}
+
+/* ====== Features Section ====== */
+.features-section {
+    padding: 5rem 0;
+    background: linear-gradient(180deg, white 0%, var(--light) 100%); /* Subtle gradient background */
+}
+
+/* ====== Section Titles ====== */
+.section-title h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+}
+
+.section-subtitle {
+    font-size: 1.125rem;
+    color: var(--dark-700);
+    max-width: 700px;
+}
+
+/* ====== Feature Cards ====== */
+.feature-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    transition: var(--transition);
+    border: 1px solid var(--light-200); /* Softer border */
+    box-shadow: var(--shadow-md); /* Softer shadow */
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg); /* More pronounced shadow on hover */
+    border-color: var(--primary-light);
+}
+
+.feature-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-full);
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+    font-size: 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-full);
+}
+
+.feature-img {
+    max-width: 100%; /* Ensure image is responsive */
+    height: auto;    /* Maintain aspect ratio */
+    object-fit: contain;
+    box-shadow: var(--shadow-md);
+    margin: 1rem auto 0;
+}
+
+/* ====== Contact Section ====== */
+.contact-section {
+    background: linear-gradient(135deg, #f9fafb 0%, #f1f5f9 100%);
+}
+
+.contact-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--light-200);
+}
+
+.contact-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-full);
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+    font-size: 1.25rem;
+}
+
+.contact-details a:hover {
+    color: var(--primary);
+}
+
+.form-control {
+    border: 1px solid var(--light-300);
+    border-radius: var(--radius);
+}
+
+.form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* ====== Footer ====== */
+.footer {
+    background: var(--dark);
+    color: white;
+}
+
+.footer h5 {
+    color: white;
+}
+
+.footer p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.7);
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: white;
+    transform: translateX(5px);
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    transition: var(--transition);
+}
+
+.social-link:hover {
+    background: var(--primary);
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ====== Buttons ====== */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    border: none;
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    color: white;
+}
+
+.btn-outline-primary {
+    color: var(--primary);
+    border-color: var(--primary);
+    background-color: transparent;
+}
+
+.feature-card .btn-outline-primary {
+    background-color: transparent !important; /* Ensure transparent background */
+    border-color: transparent !important; /* Ensure transparent border */
+    color: var(--primary);
+}
+
+.btn-outline-primary:hover {
+    color: white;
+    background-color: var(--primary);
+}
+
+/* ====== Responsive Adjustments ====== */
+@media (max-width: 991.98px) {
+    .hero-title { font-size: 2.75rem; }
+    .section-title h2 { font-size: 2rem; }
+}
+
+@media (max-width: 767.98px) {
+    .hero-section { text-align: center; }
+    .hero-title { font-size: 2.25rem; }
+    .hero-subtitle { margin: 0 auto; }
+}
+
+/* ====== Flag Image Size (Australia: 1:2 Ratio) ====== */
+.flag-au {
+    /* Standard ratio for the Australian flag is 1:2 (Height:Width) */
+    width: 160px; /* Width is twice the height */
+    height: 80px;
+    object-fit: contain; /* Ensures the flag image maintains its aspect ratio within the container */
+    border: 1px solid var(--light-300); /* Optional: Adds a subtle border */
+}
+
+/* ====== Back to Top Button ====== */
+.back-to-top {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    display: none;
+    z-index: 999;
+}
